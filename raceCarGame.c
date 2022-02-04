@@ -94,7 +94,7 @@ void startRace(struct RaceCar* raceCar1, struct RaceCar* raceCar2) {
 }
 
 int main() {
-	srand(time(0));
+  srand(time(0));
 
   struct RaceCar raceCar1 = {
     .driverName = "Leah",
