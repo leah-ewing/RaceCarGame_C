@@ -3,6 +3,16 @@
 #include <time.h>
 #include <string.h>
 
+void printIntro();
+void printCountDown();
+void printFirstPlaceAfterLap(struct Race);
+void printCongratulation(struct Race);
+int calculateTimeToCompleteLap();
+void updateRaceCar(struct RaceCar*);
+void updateFirstPlace(struct Race*, struct RaceCar*, struct RaceCar*);
+void startRace(struct RaceCar*, struct RaceCar*);
+
+
 struct Race {
   int numberOfLaps;
   int currentLap;
