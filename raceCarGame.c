@@ -3,8 +3,8 @@
 #include <time.h>
 #include <string.h>
 
-void printIntro();
-void printCountDown();
+void printIntro(void);
+void printCountDown(void);
 void printFirstPlaceAfterLap(struct Race);
 void printCongratulation(struct Race);
 int calculateTimeToCompleteLap();
