@@ -44,7 +44,7 @@ void printFirstPlaceAfterLap(struct Race race) {
 void printCongratulation(struct Race race) {
   char* firstPlaceDriverName = race.firstPlaceDriverName;
   char* firstPlaceRaceCarColor = race.firstPlaceRaceCarColor;
-  printf("Let's all congratulate %s in the %s race car for an amazing performance.\n\nIt truly was a great race and everybody have a goodnight!\n\n", firstPlaceDriverName, firstPlaceRaceCarColor);
+  printf("Let's all congratulate our winner, %s in the %s race car for an amazing performance.\n\nIt truly was a great race and everybody have a goodnight!\n\n", firstPlaceDriverName, firstPlaceRaceCarColor);
 };
 
 int calculateTimeToCompleteLap() {
@@ -61,26 +61,23 @@ void updateRaceCar(struct RaceCar* raceCar) {
 };
 
 void updateFirstPlace(struct Race* race, struct RaceCar* raceCar1, struct RaceCar* raceCar2) {
-  char* raceCar1DriverName = (*raceCar1).driverName;
-  char* raceCar2DriverName = (*raceCar2).driverName;
-  int raceCar1TotalLapTime = (*raceCar1).totalLapTime;
-  int raceCar2TotalLapTime = (*raceCar2).totalLapTime;
-  char* raceCar1Color = (*raceCar1).raceCarColor;
-  char* raceCar2Color = (*raceCar2).raceCarColor;
 
-  if (raceCar1TotalLapTime <= raceCar2TotalLapTime) {
-    strcpy((*race).firstPlaceDriverName, raceCar1DriverName);
-    strcpy((*race).firstPlaceRaceCarColor, raceCar1Color);
+  if ((*raceCar1).totalLapTime <= (*raceCar2).totalLapTime) {
+    strcpy((*race).firstPlaceDriverName, (*raceCar1).driverName);
+    strcpy((*race).firstPlaceRaceCarColor, (*raceCar1).raceCarColor);
   } else {
-    strcpy((*race).firstPlaceDriverName, raceCar2DriverName);
-    strcpy((*race).firstPlaceRaceCarColor, raceCar2Color);
+    strcpy((*race).firstPlaceDriverName, (*raceCar2).driverName);
+    strcpy((*race).firstPlaceRaceCarColor, (*raceCar2).raceCarColor);
   }
+
+  (*race).currentLap += 1;
+
 };
 
 void startRace(struct RaceCar* raceCar1, struct RaceCar* raceCar2) {
   struct Race race = {
     .numberOfLaps = 5,
-    .currentLap = 1,
+    .currentLap = 0,
     .firstPlaceDriverName = "",
     .firstPlaceRaceCarColor = ""
   };
@@ -98,13 +95,13 @@ int main() {
 
   struct RaceCar raceCar1 = {
     .driverName = "Leah",
-    .raceCarColor = "Blue",
+    .raceCarColor = "blue",
     .totalLapTime = 0
   };
 
   struct RaceCar raceCar2 = {
     .driverName = "Josh",
-    .raceCarColor = "Green",
+    .raceCarColor = "green",
     .totalLapTime = 0
   };
 
@@ -113,3 +110,42 @@ int main() {
   startRace(&raceCar1, &raceCar2);
   
 };
+
+
+
+/*
+
+Example Play:
+
+
+Welcome to our main event digital race fans!
+I hope everybody has their snacks because we are about to begin!
+
+Racers Ready! In...
+5
+4
+3
+2
+1
+Race!
+
+After lap 1
+First Place Is: Leah in the blue race car!
+
+After lap 2
+First Place Is: Josh in the green race car!
+
+After lap 3
+First Place Is: Josh in the green race car!
+
+After lap 4
+First Place Is: Leah in the blue race car!
+
+After lap 5
+First Place Is: Josh in the green race car!
+
+Let's all congratulate our winner, Josh in the green race car for an amazing performance.
+
+It truly was a great race and everybody have a goodnight!
+
+*/
