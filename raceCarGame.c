@@ -3,16 +3,6 @@
 #include <time.h>
 #include <string.h>
 
-void printIntro(void);
-void printCountDown(void);
-void printFirstPlaceAfterLap(struct Race);
-void printCongratulation(struct Race);
-int calculateTimeToCompleteLap();
-void updateRaceCar(struct RaceCar*);
-void updateFirstPlace(struct Race*, struct RaceCar*, struct RaceCar*);
-void startRace(struct RaceCar*, struct RaceCar*);
-
-
 struct Race {
   int numberOfLaps;
   int currentLap;
@@ -27,7 +17,7 @@ struct RaceCar {
 };
 
 void printIntro() {
-  printf("Welcome to our main event digital race fans!\n\nI hope everybody has their snacks because we are about to begin!\n\n");
+  printf("Welcome to our main event digital race fans!\nI hope everybody has their snacks because we are about to begin!\n\n");
 };
 
 void printCountDown() {
@@ -44,7 +34,7 @@ void printFirstPlaceAfterLap(struct Race race) {
 void printCongratulation(struct Race race) {
   char* firstPlaceDriverName = race.firstPlaceDriverName;
   char* firstPlaceRaceCarColor = race.firstPlaceRaceCarColor;
-  printf("Let's all congratulate our winner, %s in the %s race car for an amazing performance.\n\nIt truly was a great race and everybody have a goodnight!\n\n", firstPlaceDriverName, firstPlaceRaceCarColor);
+  printf("Let's all congratulate %s in the %s race car for an amazing performance.\n\nIt truly was a great race and everybody have a goodnight!\n\n", firstPlaceDriverName, firstPlaceRaceCarColor);
 };
 
 int calculateTimeToCompleteLap() {
@@ -70,28 +60,27 @@ void updateFirstPlace(struct Race* race, struct RaceCar* raceCar1, struct RaceCa
     strcpy((*race).firstPlaceRaceCarColor, (*raceCar2).raceCarColor);
   }
 
-  (*race).currentLap += 1;
-
 };
 
 void startRace(struct RaceCar* raceCar1, struct RaceCar* raceCar2) {
   struct Race race = {
     .numberOfLaps = 5,
-    .currentLap = 0,
+    .currentLap = 1,
     .firstPlaceDriverName = "",
     .firstPlaceRaceCarColor = ""
   };
 
-  for (int i = 0; i < sizeof(race.numberOfLaps)/sizeof(int); i++) {
+  for (int i = race.currentLap; i <= race.numberOfLaps; i++) {
     updateRaceCar(raceCar1);
     updateRaceCar(raceCar2);
     updateFirstPlace(&race, raceCar1, raceCar2);
     printFirstPlaceAfterLap(race);
+    race.currentLap += 1;
   } printCongratulation(race);
 }
 
 int main() {
-  srand(time(0));
+	srand(time(0));
 
   struct RaceCar raceCar1 = {
     .driverName = "Leah",
@@ -110,7 +99,6 @@ int main() {
   startRace(&raceCar1, &raceCar2);
   
 };
-
 
 
 /*
