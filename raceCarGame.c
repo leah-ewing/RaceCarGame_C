@@ -47,7 +47,7 @@ struct Race {
   int currentLap;
   char firstPlaceDriverName[25];
   char firstPlaceRaceCarColor[25];
-};
+}; 
 
 struct RaceCar {
   char driverName[25];
